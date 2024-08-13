@@ -1,6 +1,6 @@
 <h2 class="text-center">PRODUCTOS</h2>
 <div class="row justify-content-center mt-3 mb-5">
-    <form class="border bg-light shadow rounded p-4 col-lg-6" id="formProducto">
+    <form class="border bg-light shadow rounded p-4 col-lg-5" id="formProducto">
         <div class="row mb-3">
             <div class="col">
                 <input type="hidden" name="prod_id" id="prod_id" class="form-control">
@@ -31,11 +31,11 @@
             <h2 class="text-center mb-4">Productos Registrados</h2>
             <div class="table-responsive">
                 <table class="table table-bordered table-hover" id="TablaProductos">
-                    <thead class="table-warning">
+                    <thead class="table-success">
                         <tr>
                             <th>No.</th>
                             <th>Nombre Producto</th>
-                            <th>Precio</th>
+                            <th> Q. Precio</th>
                         </tr>
                     </thead>
                     <tbody>

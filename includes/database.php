@@ -20,3 +20,4 @@ try {
     header('Location: /');
     exit;
 }
+
