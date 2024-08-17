@@ -1,4 +1,4 @@
-<h2 class="text-center">PRODUCTOS</h2>
+<h2 class="text-center">FORMULARIO PARA INGRESAR PRODUCTOS</h2>
 <div class="row justify-content-center mt-3 mb-5">
     <form class="border bg-light shadow rounded p-4 col-lg-5" id="formProducto">
         <div class="row mb-3">
@@ -23,6 +23,18 @@
                 <button type="submit" id="BtnGuardar" class="btn btn-primary w-100 text-uppercase shadow border-0">Guardar</button>
             </div>
         </div>
+        <!-- BOTONES -->
+        <div class="row">
+            <div class="col">
+                <button type="submit" id="btnGuardar" class="btn btn-primary w-100">Guardar</button>
+            </div>
+            <div class="col">
+                <button type="button" id="btnModificar" class="btn btn-warning w-100">Modificar</button>
+            </div>
+            <div class="col">
+                <button type="button" id="btnCancelar" class="btn btn-danger w-100">Cancelar</button>
+            </div>
+        </div>
     </form>
 
     <!-- MOSTRAR DATOS -->
@@ -36,6 +48,7 @@
                             <th>No.</th>
                             <th>Nombre Producto</th>
                             <th> Q. Precio</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -10,44 +10,104 @@ class ProductoController
 {
     public static function index(Router $router)
     {
-        $router->render('producto/index', []);
+        $productos = Producto::find(2);
+        $router->render('productos/index', [
+            'productos' => $productos
+        ]);
     }
 
     public static function guardarAPI()
     {
         $_POST['prod_nombre'] = htmlspecialchars($_POST['prod_nombre']);
-        $_POST['prod_precio'] = filter_var($_POST['prod_precio'], FILTER_VALIDATE_FLOAT);
-
+        $_POST['prod_precio'] = filter_var($_POST['prod_precio'], FILTER_SANITIZE_NUMBER_FLOAT);
         try {
             $producto = new Producto($_POST);
             $resultado = $producto->crear();
             http_response_code(200);
             echo json_encode([
                 'codigo' => 1,
-                'mensaje' => 'Guardado Correctamente'
+                'mensaje' => 'Producto guardado exitosamente',
             ]);
-        } catch (Exception $error) {
+        } catch (Exception $e) {
             http_response_code(500);
             echo json_encode([
                 'codigo' => 0,
-                'mensaje' => 'Error al Guardar Registro',
-                'detalle' => $error->getMessage()
+                'mensaje' => 'Error al guardar producto',
+                'detalle' => $e->getMessage(),
             ]);
         }
     }
 
-    public static function BuscarAPI()
+    public static function buscarAPI()
     {
         try {
-
-            $productos = Producto::all();
+            // ORM - ELOQUENT
+            // $productos = Producto::all();
+            $productos = Producto::obtenerProductosconQuery();
             http_response_code(200);
-            echo json_encode($productos);
+            echo json_encode([
+                'codigo' => 1,
+                'mensaje' => 'Datos encontrados',
+                'detalle' => '',
+                'datos' => $productos
+            ]);
         } catch (Exception $e) {
             http_response_code(500);
             echo json_encode([
                 'codigo' => 0,
                 'mensaje' => 'Error al buscar productos',
+                'detalle' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    public static function modificarAPI()
+    {
+        $_POST['prod_nombre'] = htmlspecialchars($_POST['prod_nombre']);
+        $_POST['prod_precio'] = filter_var($_POST['prod_precio'], FILTER_SANITIZE_NUMBER_FLOAT);
+        $id = filter_var($_POST['prod_id'], FILTER_SANITIZE_NUMBER_INT);
+        try {
+
+            $producto = Producto::find($id);
+            $producto->sincronizar($_POST);
+            $producto->actualizar();
+            http_response_code(200);
+            echo json_encode([
+                'codigo' => 1,
+                'mensaje' => 'Producto modificado exitosamente',
+            ]);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode([
+                'codigo' => 0,
+                'mensaje' => 'Error al modificar producto',
+                'detalle' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    public static function eliminarAPI()
+    {
+
+        $id = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
+        try {
+
+            $producto = Producto::find($id);
+            // $producto->sincronizar([
+            //     'situacion' => 0
+            // ]);
+            // $producto->actualizar();
+            $producto->eliminar();
+            http_response_code(200);
+            echo json_encode([
+                'codigo' => 1,
+                'mensaje' => 'Producto eliminado exitosamente',
+            ]);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode([
+                'codigo' => 0,
+                'mensaje' => 'Error al eliminado producto',
                 'detalle' => $e->getMessage(),
             ]);
         }
