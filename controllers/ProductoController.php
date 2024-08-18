@@ -26,7 +26,11 @@ class ProductoController
             echo json_encode([
                 'codigo' => 1,
                 'mensaje' => 'Registro Guardado Correctamente'
+                  // echo json_encode($producto);
+            // exit;
             ]);
+//   echo json_encode($producto);
+//   exit;
         } catch (Exception $error) {
             http_response_code(500);
             echo json_encode([
@@ -60,7 +64,7 @@ class ProductoController
     {
         $_POST['prod_nombre'] = htmlspecialchars($_POST['prod_nombre']);
         $_POST['prod_precio'] = filter_var($_POST['prod_precio'], FILTER_SANITIZE_NUMBER_FLOAT);
-        $id = filter_var($_POST['producto_id'], FILTER_SANITIZE_NUMBER_INT);
+        $id = filter_var($_POST['prod_id'], FILTER_SANITIZE_NUMBER_INT);
         try {
 
             $producto = Producto::find($id);
@@ -88,9 +92,9 @@ class ProductoController
         try {
 
             $producto = Producto::find($id);
-            $producto->sincronizar([
-                'producto_situacion' => 0
-            ]);
+             $producto->sincronizar([
+                 'prod_situacion' => 0
+             ]);
             // echo json_encode($producto);
             // exit;
             $producto->actualizar();

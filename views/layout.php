@@ -7,10 +7,10 @@
     <script src="build/js/app.js"></script>
     <link rel="shortcut icon" href="<?= asset('images/cit.png') ?>" type="image/x-icon">
     <link rel="stylesheet" href="<?= asset('build/styles.css') ?>">
-    <title>DemoApp</title>
+    <title>APP JENNI</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark  bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark" style="font-family:'Courier New', Courier, monospace; background-color: #45b39d;">
         
         <div class="container-fluid">
 
@@ -18,8 +18,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <a class="navbar-brand" href="/ejemplo/">
-                <img src="<?= asset('./images/cit.png') ?>" width="35px'" alt="cit" >
-                Aplicaciones
+                <img src="<?= asset('./images/image.png') ?>" width="50px'" alt="cit" >
+                Autenticacion
             </a>
             <div class="collapse navbar-collapse" id="navbarToggler">
                 
@@ -28,9 +28,9 @@
                         <a class="nav-link" aria-current="page" href="/ejemplo/"><i class="bi bi-house-fill me-2"></i>Inicio</a>
                     </li>
   
-                    <div class="nav-item dropdown " >
+                    <div class="nav-item dropdown " >s
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                            <i class="bi bi-gear me-2"></i>Dropdown
+                            <i class="bi bi-gear me-2"></i>Herramientas
                         </a>
                         <ul class="dropdown-menu  dropdown-menu-dark "id="dropwdownRevision" style="margin: 0;">
                             <!-- <h6 class="dropdown-header">Información</h6> -->
@@ -38,8 +38,18 @@
                                 <a class="dropdown-item nav-link text-white " href="/CrudMVC2024/producto"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Productos</a>
                             </li>
                         
-                    
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/CrudMVC2024/producto"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Aplicacion</a>
+                            </li>
                         
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/CrudMVC2024/producto"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Roles</a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/CrudMVC2024/producto"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Usuarios</a>
+                            </li>
+
                         </ul>
                     </div> 
 
@@ -57,7 +67,7 @@
     <div class="progress fixed-bottom" style="height: 6px;">
         <div class="progress-bar progress-bar-animated bg-danger" id="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
-    <div class="container-fluid pt-5 mb-4" style="min-height: 85vh">
+    <div class="container-fluid pt-5 mb-4" style="min-height: 85vh; font-family:'Courier New'">
         
         <?php echo $contenido; ?>
     </div>

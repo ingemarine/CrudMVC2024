@@ -23,7 +23,7 @@
                 <button type="submit" id="BtnGuardar" class="btn btn-primary w-100 text-uppercase shadow border-0">Guardar</button>
             </div>
             <div class="col-lg-5">
-                <button type="button" id="BtnModificar" class="btn btn-warning w-100 text-uppercase shadow border-0">Modificar</button>
+                <button type="button" id="BtnModificar" class="btn btn-success w-100 text-uppercase shadow border-0">Modificar</button>
             </div>
             <div class="col-lg-5">
                 <button type="button" id="BtnCancelar" class="btn btn-secondary w-100 text-uppercase shadow border-0">Cancelar</button>
@@ -33,11 +33,11 @@
 
     <!-- MOSTRAR DATOS -->
     <div class="row justify-content-center mt-4">
-        <div class="col-lg-6 table-wrapper">
+        <div class="col-lg-6 table-wrapper"style="font-family:'Courier New', Courier, monospace; background-color: darkgoldenrod;">
             <h2 class="text-center mb-4">Productos Ingresados</h2>
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover" id="ProductosIngresados">
-                    <thead class="table-warning">
+            <div class="table-responsive" >
+                <table class="table table-bordered table-hover" id="Tablita" style="font-family:'Courier New', Courier, monospace; background-color: darkgoldenrod;">
+                    <thead class="table-primary">
                         <tr>
                             <th>No.</th>
                             <th>Nombres</th>
@@ -56,4 +56,4 @@
         </div>
     </div>
 </div>
-<script src="<?= asset('./build/js/productos/index.js') ?>"></script>
+<script src="<?= asset('./build/js/producto/index.js') ?>"></script>

@@ -4,7 +4,7 @@ import { Toast, validarFormulario } from "../funciones";
 import Swal from "sweetalert2";
 
 const formulario = document.getElementById('FormProducto');
-const TablaProductos = document.getElementById('ProductosIngresados');
+const TablaProductos = document.getElementById('Tablita');
 const BtnGuardar = document.getElementById('BtnGuardar');
 const BtnModificar = document.getElementById('BtnModificar');
 const BtnCancelar = document.getElementById('BtnCancelar');
@@ -44,7 +44,7 @@ const guardar = async (e) => {
             Swal.fire({
                 title: '¡Éxito!',
                 text: mensaje,
-                icon: 'success',
+                icon: 'primary',
                 showConfirmButton: false,
                 timer: 1500,
                 timerProgressBar: true,
@@ -139,7 +139,7 @@ const Buscar = async () => {
     } else {
         const tr = document.createElement('tr');
         const td = document.createElement('td');
-        td.innerText = 'No hay productos Registrados ';
+        td.innerText = 'No existen productos ';
         tr.classList.add('text-center');
         td.colSpan = 5;
 
@@ -176,7 +176,7 @@ const Modificar = async (e) => {
     if (!validarFormulario(formulario)) {
         Swal.fire({
             title: "Campos vacios",
-            text: "Debe llenar todos los campos",
+            text: "Todos los capos deben estar llenos",
             icon: "info"
         })
         return
@@ -239,7 +239,7 @@ const Modificar = async (e) => {
 const Eliminar = async (productos) => {
     let confirmacion = await Swal.fire({
         title: '¿Está seguro de que desea eliminar este producto?',
-        text: "Esta acción es irreversible.",
+        text: "Ya no podra regresar esta accion.",
         icon: 'warning',
         showDenyButton: true,
         showCancelButton: false,

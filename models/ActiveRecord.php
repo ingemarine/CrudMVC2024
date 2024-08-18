@@ -108,7 +108,8 @@ class ActiveRecord {
         $query .= " ) VALUES ("; 
         $query .= join(", ", array_values($atributos));
         $query .= " ) ";
-        
+        // echo $query;
+        // exit;
 
         // debuguear($query);
 
@@ -217,7 +218,6 @@ class ActiveRecord {
 
         return $objeto;
     }
-
 
 
     // Identificar y unir los atributos de la BD
