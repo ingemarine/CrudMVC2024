@@ -55,18 +55,18 @@
                             </li>
                         
                             <li>
-                                <a class="dropdown-item nav-link text-white " href="/CrudMVC2024/producto"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Roles</a>
+                                <a class="dropdown-item nav-link text-white " href="/CrudMVC2024/rol"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Roles</a>
                             </li>
 
                             <li>
-                                <a class="dropdown-item nav-link text-white " href="/CrudMVC2024/producto"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Usuarios</a>
+                                <a class="dropdown-item nav-link text-white " href="/CrudMVC2024/usuario"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Usuarios</a>
                             </li>
 
                         </ul>
                     </div> 
 
 
-
+s
                 </ul> 
                 <div class="col-lg-1 d-grid mb-lg-0 mb-2">
                     <!-- Ruta relativa desde el archivo donde se incluye menu.php -->
