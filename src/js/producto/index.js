@@ -82,8 +82,8 @@ const buscar = async () => {
                 const buttonModificar = document.createElement('button');
                 const buttonEliminar = document.createElement('button');
                 td1.innerText = counter
-                td2.innerText = producto.PROD_NOMBRE
-                td3.innerText = producto.PROD_PRECIO
+                td2.innerText = producto.prod_nombre
+                td3.innerText = producto.prod_precio
 
                 buttonModificar.classList.add('btn', 'btn-warning')
                 buttonEliminar.classList.add('btn', 'btn-danger')
@@ -124,9 +124,9 @@ buscar();
 
 const traerDatos = (producto) => {
     console.log(producto);
-    formulario.prod_id.value = producto.PROD_ID
-    formulario.prod_nombre.value = producto.PROD_NOMBRE
-    formulario.prod_precio.value = producto.PROD_PRECIO
+    formulario.prod_id.value = producto.prod_id
+    formulario.prod_nombre.value = producto.prod_nombre
+    formulario.prod_precio.value = producto.prod_precio
     tabla.parentElement.parentElement.style.display = 'none'
 
     btnGuardar.parentElement.style.display = 'none'
@@ -209,7 +209,7 @@ const eliminar = async (producto) => {
     if (confirmacion.isConfirmed) {
         try {
             const body = new FormData()
-            body.append('id', producto.id)
+            body.append('id', producto.prod_id)
             const url = "/CrudMVC2024/API/producto/eliminar"
             const config = {
                 method: 'POST',

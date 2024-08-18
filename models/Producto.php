@@ -24,7 +24,7 @@ class Producto extends ActiveRecord
 
     public static function obtenerProductosconQuery()
     {
-        $sql = "SELECT * FROM productos where situacion = 1";
+        $sql = "SELECT * FROM productos where prod_situacion = 1";
         return self::fetchArray($sql);
     }
 }

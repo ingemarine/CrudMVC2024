@@ -11,8 +11,8 @@ class ProductoController
     public static function index(Router $router)
     {
         $productos = Producto::find(2);
-        $router->render('productos/index', [
-            'productos' => $productos
+        $router->render('producto/index', [
+            'producto' => $productos
         ]);
     }
 
