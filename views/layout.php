@@ -28,7 +28,7 @@
                         <a class="nav-link" aria-current="page" href="/ejemplo/"><i class="bi bi-house-fill me-2"></i>Inicio</a>
                     </li>
   
-                    <div class="nav-item dropdown " >s
+                    <div class="nav-item dropdown " >
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                             <i class="bi bi-gear me-2"></i>Herramientas
                         </a>
@@ -38,8 +38,20 @@
                                 <a class="dropdown-item nav-link text-white " href="/CrudMVC2024/producto"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Productos</a>
                             </li>
                         
+
+                        </ul>
+                    </div> 
+<!-- aqui empieza aplicacion -->
+
+                        <div class="nav-item dropdown " >
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <i class="bi bi-gear me-2"></i>Productos
+                        </a>
+                        <ul class="dropdown-menu  dropdown-menu-dark "id="dropwdownRevision" style="margin: 0;">
+                            <!-- <h6 class="dropdown-header">Información</h6> -->
+                         
                             <li>
-                                <a class="dropdown-item nav-link text-white " href="/CrudMVC2024/producto"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Aplicacion</a>
+                                <a class="dropdown-item nav-link text-white " href="/CrudMVC2024/aplicacion"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Aplicacion</a>
                             </li>
                         
                             <li>
@@ -52,6 +64,8 @@
 
                         </ul>
                     </div> 
+
+
 
                 </ul> 
                 <div class="col-lg-1 d-grid mb-lg-0 mb-2">
