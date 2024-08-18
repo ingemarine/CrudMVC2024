@@ -5,52 +5,47 @@ namespace Controllers;
 use Exception;
 use Model\Producto;
 use MVC\Router;
+use Model\ActiveRecord;
 
 class ProductoController
 {
     public static function index(Router $router)
     {
-        $productos = Producto::find(2);
-        $router->render('producto/index', [
-            'producto' => $productos
-        ]);
+        $router->render('producto/index', []);
     }
 
     public static function guardarAPI()
     {
         $_POST['prod_nombre'] = htmlspecialchars($_POST['prod_nombre']);
-        $_POST['prod_precio'] = filter_var($_POST['prod_precio'], FILTER_SANITIZE_NUMBER_FLOAT);
+        $_POST['prod_precio'] = filter_var($_POST['prod_precio'], FILTER_VALIDATE_FLOAT);
+
         try {
             $producto = new Producto($_POST);
             $resultado = $producto->crear();
             http_response_code(200);
             echo json_encode([
                 'codigo' => 1,
-                'mensaje' => 'Producto guardado exitosamente',
+                'mensaje' => 'Registro Guardado Correctamente'
             ]);
-        } catch (Exception $e) {
+        } catch (Exception $error) {
             http_response_code(500);
             echo json_encode([
                 'codigo' => 0,
-                'mensaje' => 'Error al guardar producto',
-                'detalle' => $e->getMessage(),
+                'mensaje' => 'Error al Guardar Registro',
+                'detalle' => $error->getMessage()
             ]);
         }
     }
 
-    public static function buscarAPI()
+    public static function BuscarAPI()
     {
         try {
-            // ORM - ELOQUENT
-            // $productos = Producto::all();
-            $productos = Producto::obtenerProductosconQuery();
+
+            $sql = "SELECT * FROM productos where prod_situacion = 1";
+
+            $productos = Producto::fetchArray($sql);
             http_response_code(200);
-            echo json_encode([
-                'codigo' => 1,
-                'mensaje' => 'Datos encontrados',
-                'detalle' => '',
-                'datos' => $productos
-            ]);
+            echo json_encode($productos);
         } catch (Exception $e) {
             http_response_code(500);
             echo json_encode([
@@ -65,7 +60,7 @@ class ProductoController
     {
         $_POST['prod_nombre'] = htmlspecialchars($_POST['prod_nombre']);
         $_POST['prod_precio'] = filter_var($_POST['prod_precio'], FILTER_SANITIZE_NUMBER_FLOAT);
-        $id = filter_var($_POST['prod_id'], FILTER_SANITIZE_NUMBER_INT);
+        $id = filter_var($_POST['producto_id'], FILTER_SANITIZE_NUMBER_INT);
         try {
 
             $producto = Producto::find($id);
@@ -73,7 +68,7 @@ class ProductoController
             $producto->actualizar();
             http_response_code(200);
             echo json_encode([
-                'codigo' => 1,
+                'codigo' => 3,
                 'mensaje' => 'Producto modificado exitosamente',
             ]);
         } catch (Exception $e) {
@@ -93,21 +88,22 @@ class ProductoController
         try {
 
             $producto = Producto::find($id);
-            // $producto->sincronizar([
-            //     'situacion' => 0
-            // ]);
-            // $producto->actualizar();
-            $producto->eliminar();
+            $producto->sincronizar([
+                'producto_situacion' => 0
+            ]);
+            // echo json_encode($producto);
+            // exit;
+            $producto->actualizar();
             http_response_code(200);
             echo json_encode([
-                'codigo' => 1,
+                'codigo' => 4,
                 'mensaje' => 'Producto eliminado exitosamente',
             ]);
         } catch (Exception $e) {
             http_response_code(500);
             echo json_encode([
                 'codigo' => 0,
-                'mensaje' => 'Error al eliminado producto',
+                'mensaje' => 'Error al eliminar el producto',
                 'detalle' => $e->getMessage(),
             ]);
         }
