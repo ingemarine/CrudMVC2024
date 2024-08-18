@@ -20,8 +20,12 @@
         </div>
         <div class="row mb-3 justify-content-center text-center">
             <div class="col-lg-5">
-                <button type="submit" id="BtnGuardar" class="btn btn-primary w-100 text-uppercase shadow border-0">Guardar</button>
+                <button type="submit" id="BtnGuardar" class="btn btn-primary w-100 text-uppercase shadow border-0"><i class="bi bi-floppy"></i>Guardar</button>
             </div>
+
+            <div class="col text-center">
+                            <button type="button" id="BtnBuscar" class="btn btn-primary w-100 text-uppercase shadow border-0"><i class="bi bi-search"></i>Buscar</button>
+                        </div>
             <div class="col-lg-5">
                 <button type="button" id="BtnModificar" class="btn btn-success w-100 text-uppercase shadow border-0">Modificar</button>
             </div>

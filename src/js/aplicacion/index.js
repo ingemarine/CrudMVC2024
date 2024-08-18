@@ -238,7 +238,7 @@ const Modificar = async (e) => {
 
 const Eliminar = async (aplicaciones) => {
     let confirmacion = await Swal.fire({
-        title: '¿Está seguro de que desea eliminar este producto?',
+        title: '¿Está seguro de que desea eliminar esta aplicacion?',
         text: "Ya no podra regresar esta accion.",
         icon: 'warning',
         showDenyButton: true,
