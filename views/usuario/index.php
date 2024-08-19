@@ -58,13 +58,14 @@
                         <tr>
                             <th>No.</th>
                             <th>Nombre</th>
+                            <th>Catalogo</th>
                             <th>Modificar</th>
                             <th>Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td colspan="4" class="text-center">Sin Usuarios registrados</td>
+                            <td colspan="5" class="text-center">Sin Usuarios registrados</td>
                         </tr>
                     </tbody>
                 </table>

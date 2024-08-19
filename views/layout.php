@@ -41,7 +41,7 @@
 
                         </ul>
                     </div> 
-<!-- aqui empieza aplicacion -->
+                    <!-- aqui empieza aplicacion -->
 
                         <div class="nav-item dropdown " >
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
@@ -62,6 +62,9 @@
                                 <a class="dropdown-item nav-link text-white " href="/CrudMVC2024/usuario"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Usuarios</a>
                             </li>
 
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/CrudMVC2024/permiso"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Permiso</a>
+                            </li>
                         </ul>
                     </div> 
 

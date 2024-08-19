@@ -1,6 +1,6 @@
 <h2 class="text-center">ROLES</h2>
 <div class="row justify-content-center mt-3 mb-5">
-    <form class="border bg-light shadow rounded p-4 col-lg-6" id="FormAplicacion">
+    <form class="border bg-light shadow rounded p-4 col-lg-6" id="FormRol">
         <div class="row mb-3">
             <div class="col">
                 <input type="hidden" name="rol_id" id="rol_id" class="form-control">
@@ -22,8 +22,13 @@
 
         <div class="row mb-3">
             <div class="col">
-                <label for="rol_app">Nombre del Rol App</label>
-                <input type="text" name="rol_app" id="rol_app" class="form-control">
+                <label for="rol_app">Nombre de la Aplicacion</label>
+                <select name="rol_app" id="rol_app" class="form-control">
+                    <option value="#">Seleccione...</option>
+                    <?php foreach ($aplicaciones as $app) : ?> 
+                        <option value="<?= $app['app_id'] ?>"> <?=$app['app_nombre']?></option>';
+                    <?php endforeach ?>
+                </select>
             </div>
         </div>
 
@@ -45,7 +50,7 @@
         <div class="col-lg-6 table-wrapper"style="font-family:'Courier New', Courier, monospace; background-color: darkgoldenrod;">
             <h2 class="text-center mb-4">Roles Ingresados</h2>
             <div class="table-responsive" >
-                <table class="table table-bordered table-hover" id="TablitaAplicacion" style="font-family:'Courier New', Courier, monospace; background-color: darkgoldenrod;">
+                <table class="table table-bordered table-hover" id="TablitaRol" style="font-family:'Courier New', Courier, monospace; background-color: darkgoldenrod;">
                     <thead class="table-success">
                         <tr>
                             <th>No.</th>

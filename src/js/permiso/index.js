@@ -2,26 +2,93 @@ import { Dropdown } from "bootstrap";
 import { validarFormulario } from "../funciones";
 import Swal from "sweetalert2";
 
+const formulario = document.getElementById('FormPermiso');
+const BtnGuardar = document.getElementById('btnGuardar');
+const BtnModificar = document.getElementById('btnModificar');
+const BtnCancelar = document.getElementById('btnCancelar');
+const TablaPermisos = document.getElementById('TablaPermisos')
 
-const formulario = document.getElementById('FormRol');
-const TablaRol = document.getElementById('TablitaRol');
-const BtnGuardar = document.getElementById('BtnGuardar');
-const BtnModificar = document.getElementById('BtnModificar');
-const BtnCancelar = document.getElementById('BtnCancelar');
-
-TablaRol.parentElement.parentElement.classList.add('d-none');
+TablaPermisos.parentElement.parentElement.classList.add('d-none');
 BtnModificar.parentElement.classList.add('d-none');
 BtnCancelar.parentElement.classList.add('d-none');
+
+
+const Buscar = async () => {
+
+    const url = '/CrudMVC2024/API/permiso/buscar';
+
+    const config = {
+        method: 'GET'
+    }
+
+    const respuesta = await fetch(url, config);
+    const data = await respuesta.json();
+    // console.log(data)
+    TablaPermisos.tBodies[0].innerHTML = '';
+    const fragment = document.createDocumentFragment();
+    let contador = 1;
+
+    if (data.length > 0) {
+        TablaPermisos.parentElement.parentElement.classList.remove('d-none');
+        data.forEach(permiso => {
+            const tr = document.createElement('tr');
+            const celda1 = document.createElement('td');
+            const celda2 = document.createElement('td');
+            const celda3 = document.createElement('td');
+            const celda4 = document.createElement('td');
+            const celda5 = document.createElement('td');
+
+            const BtnModificar = document.createElement('button');
+            const BtnEliminar = document.createElement('button');
+
+            BtnModificar.innerHTML = '<i class="bi bi-pencil"></i>';
+            BtnModificar.classList.add('btn', 'btn-warning', 'w-100', 'text-uppercase', 'fw-bold', 'shadow', 'border-0');
+
+            BtnEliminar.innerHTML = '<i class="bi bi-trash3"></i>';
+            BtnEliminar.classList.add('btn', 'btn-danger', 'w-100', 'text-uppercase', 'fw-bold', 'shadow', 'border-0');
+
+            BtnModificar.addEventListener('click', () => llenarDatos(permiso));
+            BtnEliminar.addEventListener('click', () => Eliminar(permiso))
+
+            celda1.innerText = contador;
+            celda2.innerText = permiso.usu_nombre;
+            celda3.innerText = permiso.rol_nombre;
+            celda4.appendChild(BtnModificar)
+            celda5.appendChild(BtnEliminar)
+
+            tr.appendChild(celda1);
+            tr.appendChild(celda2);
+            tr.appendChild(celda3);
+            tr.appendChild(celda4);
+            tr.appendChild(celda5);
+
+            fragment.appendChild(tr);
+            contador++;
+
+        })
+
+    } else {
+        const tr = document.createElement('tr');
+        const td = document.createElement('td');
+        td.innerText = 'No hay permiso Registrados ';
+        tr.classList.add('text-center');
+        td.colSpan = 5;
+
+        tr.appendChild(td);
+        fragment.appendChild(tr);
+    }
+    TablaPermisos.tBodies[0].appendChild(fragment);
+}
 
 const guardar = async (e) => {
     e.preventDefault();
 
     BtnGuardar.disabled = true;
 
-    if (!validarFormulario(formulario, ['rol_id'])) {
+    if (!validarFormulario(formulario, ['permiso_id'])) {
         Swal.fire({
             title: "Campos vacios",
-            text: "Llene todos los campos",
+            text: "Debe llenar todos los campos",
             icon: "info"
         })
         BtnGuardar.disabled = false;
@@ -30,7 +97,7 @@ const guardar = async (e) => {
 
     try {
         const body = new FormData(formulario)
-        const url = '/CrudMVC2024/API/rol/guardar';
+        const url = '/CrudMVC2024/API/permiso/guardar';
 
         const config = {
             method: 'POST',
@@ -63,7 +130,7 @@ const guardar = async (e) => {
             Swal.fire({
                 title: '¡Error!',
                 text: mensaje,
-                icon: 'danger',
+                icon: 'warning',
                 showConfirmButton: false,
                 timer: 1500,
                 timerProgressBar: true,
@@ -80,93 +147,25 @@ const guardar = async (e) => {
         console.log(error)
     }
     BtnGuardar.disabled = false;
+
 }
 
-const Buscar = async () => {
+const llenarDatos = (permiso) => {
 
-    const url = '/CrudMVC2024/API/rol/buscar';
-
-    const config = {
-        method: 'GET'
-    }
-
-    const respuesta = await fetch(url, config);
-    const data = await respuesta.json();
-    // console.log(data);
-    TablaRol.tBodies[0].innerHTML = '';
-    const fragment = document.createDocumentFragment();
-    let contador = 1;
-
-    if (data.length > 0) {
-        TablaRol.parentElement.parentElement.classList.remove('d-none');
-        data.forEach(roles => {
-            const tr = document.createElement('tr');
-            const celda1 = document.createElement('td');
-            const celda2 = document.createElement('td');
-            const celda3 = document.createElement('td');
-            const celda4 = document.createElement('td');
-            const celda5 = document.createElement('td');
-            const celda6 = document.createElement('td');
-
-            const BtnModificar = document.createElement('button');
-            const BtnEliminar = document.createElement('button');
-
-            BtnModificar.innerHTML = '<i class="bi bi-pencil"></i>';
-            BtnModificar.classList.add('btn', 'btn-warning', 'w-100', 'text-uppercase', 'fw-bold', 'shadow', 'border-0');
-
-            BtnEliminar.innerHTML = '<i class="bi bi-trash3"></i>';
-            BtnEliminar.classList.add('btn', 'btn-danger', 'w-100', 'text-uppercase', 'fw-bold', 'shadow', 'border-0');
-
-            BtnModificar.addEventListener('click', () => llenarDatos(roles));
-            BtnEliminar.addEventListener('click', () => Eliminar(roles))
-
-            celda1.innerText = contador;
-            celda2.innerText = roles.rol_nombre;
-            celda3.innerText = roles.rol_nombre_ct;
-            celda4.innerText = roles.app_nombre;
-            celda5.appendChild(BtnModificar)
-            celda6.appendChild(BtnEliminar)
-
-            tr.appendChild(celda1);
-            tr.appendChild(celda2);
-            tr.appendChild(celda3);
-            tr.appendChild(celda4);
-            tr.appendChild(celda5);
-            tr.appendChild(celda6);
-            fragment.appendChild(tr);
-            contador++;
-
-        })
-
-    } else {
-        const tr = document.createElement('tr');
-        const td = document.createElement('td');
-        td.innerText = 'No hay app Registrados ';
-        tr.classList.add('text-center');
-        td.colSpan = 4;
-
-        tr.appendChild(td);
-        fragment.appendChild(tr);
-    }
-    TablaRol.tBodies[0].appendChild(fragment);
-}
-
-const llenarDatos = (roles) => {
-
-    TablaRol.parentElement.parentElement.classList.add('d-none');
+    TablaPermisos.parentElement.parentElement.classList.add('d-none');
     BtnGuardar.parentElement.classList.add('d-none');
     BtnModificar.parentElement.classList.remove('d-none');
     BtnCancelar.parentElement.classList.remove('d-none');
 
-    formulario.rol_id.value = roles.rol_id;
-    formulario.rol_nombre.value = roles.rol_nombre;
-    formulario.rol_nombre_ct.value = roles.rol_nombre_ct;
-    formulario.rol_app.value = roles.rol_app;
+    formulario.permiso_id.value = permiso.permiso_id;
+    formulario.permiso_usuario.value = permiso.permiso_usuario;
+    formulario.permiso_rol.value = permiso.permiso_rol;
+
 }
 
 const Cancelar = () => {
 
-    TablaRol.parentElement.parentElement.classList.remove('d-none');
+    TablaPermisos.parentElement.parentElement.classList.remove('d-none');
     BtnGuardar.parentElement.classList.remove('d-none');
     BtnModificar.parentElement.classList.add('d-none');
     BtnCancelar.parentElement.classList.add('d-none');
@@ -189,7 +188,7 @@ const Modificar = async (e) => {
 
     try {
         const body = new FormData(formulario)
-        const url = '/CrudMVC2024/API/rol/modificar';
+        const url = '/CrudMVC2024/API/permiso/modificar';
 
         const config = {
             method: 'POST',
@@ -240,10 +239,9 @@ const Modificar = async (e) => {
     }
 }
 
-
-const Eliminar = async (roles) => {
+const Eliminar = async (permiso) => {
     let confirmacion = await Swal.fire({
-        title: '¿Está seguro de que desea eliminar este rol?',
+        title: '¿Está seguro de que desea eliminar este permiso?',
         text: "Esta acción es irreversible.",
         icon: 'warning',
         showDenyButton: true,
@@ -262,12 +260,14 @@ const Eliminar = async (roles) => {
     });
     if (confirmacion.isConfirmed) {
 
+
         try {
 
-            const body = new FormData()
-            body.append('id', roles.rol_id)
 
-            const url = '/CrudMVC2024/API/rol/eliminar';
+            const body = new FormData()
+            body.append('id', permiso.permiso_id)
+
+            const url = '/CrudMVC2024/API/permiso/eliminar';
             const config = {
                 method: 'POST',
                 body
@@ -316,7 +316,9 @@ const Eliminar = async (roles) => {
         }
     }
 }
+
+
 Buscar();
-formulario.addEventListener('submit', guardar)
-BtnCancelar.addEventListener('click', Cancelar)
-BtnModificar.addEventListener('click', Modificar)
+formulario.addEventListener('submit', guardar);
+BtnCancelar.addEventListener('click', Cancelar);
+BtnModificar.addEventListener('click', Modificar);

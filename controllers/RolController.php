@@ -3,24 +3,27 @@
 namespace Controllers;
 
 use Exception;
+use Model\Aplicacion;
 use Model\Rol;
 use MVC\Router;
-use Model\ActiveRecord;
 
 class RolController
 {
     public static function index(Router $router)
-    {
-        $router->render('rol/index', []);
+    {   
+        $sql = "SELECT * FROM aplicacion where app_situacion = 1";
+
+        $resultado = Aplicacion::fetchArray($sql);
+        $router->render('rol/index', [
+            'aplicaciones' => $resultado
+        ]);
     }
 
     public static function guardarAPI()
     {
         $_POST['rol_nombre'] = htmlspecialchars($_POST['rol_nombre']);
         $_POST['rol_nombre_ct'] = htmlspecialchars($_POST['rol_nombre_ct']);
-        $_POST['rol_app'] = htmlspecialchars($_POST['rol_app']);
-
-    
+        $_POST['rol_app'] = filter_var($_POST['rol_app'], FILTER_SANITIZE_NUMBER_INT);
 
         try {
             $roles = new Rol($_POST);
@@ -28,17 +31,13 @@ class RolController
             http_response_code(200);
             echo json_encode([
                 'codigo' => 1,
-                'mensaje' => 'Rol Guardado Correctamente'
-                  // echo json_encode($producto);
-            // exit;
+                'mensaje' => 'Registro Guardado Correctamente'
             ]);
-//   echo json_encode($producto);
-//   exit;
         } catch (Exception $error) {
             http_response_code(500);
             echo json_encode([
                 'codigo' => 0,
-                'mensaje' => 'Error al Guardar Rol',
+                'mensaje' => 'Error al Guardar Registro',
                 'detalle' => $error->getMessage()
             ]);
         }
@@ -48,7 +47,7 @@ class RolController
     {
         try {
 
-            $sql = "SELECT * FROM rol where rol_situacion = 1";
+            $sql = "SELECT rol_id, rol_nombre, rol_app, rol_nombre_ct, app_nombre FROM rol INNER JOIN aplicacion ON app_id = rol_app WHERE rol_situacion = 1";
 
             $resultado = Rol::fetchArray($sql);
             http_response_code(200);
@@ -57,7 +56,7 @@ class RolController
             http_response_code(500);
             echo json_encode([
                 'codigo' => 0,
-                'mensaje' => 'Error al buscar Roles',
+                'mensaje' => 'Error al buscar productos',
                 'detalle' => $e->getMessage(),
             ]);
         }
@@ -67,11 +66,10 @@ class RolController
     {
         $_POST['rol_nombre'] = htmlspecialchars($_POST['rol_nombre']);
         $_POST['rol_nombre_ct'] = htmlspecialchars($_POST['rol_nombre_ct']);
-        $_POST['rol_app'] = htmlspecialchars($_POST['rol_app']);
-
+        $_POST['rol_app'] = filter_var($_POST['rol_app'], FILTER_SANITIZE_NUMBER_INT);
         $id = filter_var($_POST['rol_id'], FILTER_SANITIZE_NUMBER_INT);
-        try {
 
+        try {
             $resultado = Rol::find($id);
             $resultado->sincronizar($_POST);
             $resultado->actualizar();
@@ -84,7 +82,7 @@ class RolController
             http_response_code(500);
             echo json_encode([
                 'codigo' => 0,
-                'mensaje' => 'Error al modificar Aplicacion',
+                'mensaje' => 'Error al modificar rol',
                 'detalle' => $e->getMessage(),
             ]);
         }
@@ -96,13 +94,13 @@ class RolController
         $id = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
         try {
 
-            $roles = Rol::find($id);
-             $roles->sincronizar([
-                 'app_situacion' => 0
-             ]);
-            // echo json_encode($producto);
+            $resultado = Rol::find($id);
+            $resultado->sincronizar([
+                'rol_situacion' => 0
+            ]);
+            // echo json_encode($resultado);
             // exit;
-            $roles->actualizar();
+            $resultado->actualizar();
             http_response_code(200);
             echo json_encode([
                 'codigo' => 4,
@@ -117,4 +115,5 @@ class RolController
             ]);
         }
     }
+    
 }

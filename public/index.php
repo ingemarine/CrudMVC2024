@@ -8,6 +8,8 @@ use Controllers\ProductoController;
 use Controllers\AplicacionController;
 use Controllers\RolController;
 use Controllers\UsuarioController;
+use Controllers\PermisoController;
+
 
 
 
@@ -19,6 +21,8 @@ $router->setBaseURL('/' . $_ENV['APP_NAME']);
 
 //ESTO ES PRODUCTO//
 $router->get('/', [AppController::class, 'index']);
+
+
 $router->get('/producto', [ProductoController::class, 'index']);
 $router->get('/API/producto/buscar', [ProductoController::class, 'buscarAPI']);
 $router->post('/API/producto/guardar', [ProductoController::class, 'guardarAPI']);
@@ -47,6 +51,14 @@ $router->post('/API/usuario/guardar', [UsuarioController::class, 'guardarAPI']);
 $router->get('/API/usuario/buscar', [UsuarioController::class, 'buscarAPI']);
 $router->post('/API/usuario/modificar', [UsuarioController::class, 'modificarAPI']);
 $router->post('/API/usuario/eliminar', [UsuarioController::class, 'eliminarAPI']);
+
+//ESTO ES DE PERMISOS//
+$router->get('/permiso', [PermisoController::class, 'index']);
+$router->get('/API/permiso/buscar', [PermisoController::class, 'buscarAPI']);
+$router->post('/API/permiso/guardar', [PermisoController::class, 'guardarAPI']);
+$router->post('/API/permiso/modificar', [PermisoController::class, 'modificarAPI']);
+$router->post('/API/permiso/eliminar', [PermisoController::class, 'eliminarAPI']);
+
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
 $router->comprobarRutas();
