@@ -111,10 +111,10 @@ const Buscar = async () => {
             const BtnModificar = document.createElement('button');
             const BtnEliminar = document.createElement('button');
 
-            BtnModificar.innerHTML = '<i class="bi bi-pencil"></i>';
+            BtnModificar.innerHTML = '<i class="bi bi-pencil-square"></i>';
             BtnModificar.classList.add('btn', 'btn-warning', 'w-100', 'text-uppercase', 'fw-bold', 'shadow', 'border-0');
 
-            BtnEliminar.innerHTML = '<i class="bi bi-trash3"></i>';
+            BtnEliminar.innerHTML = '<i class="bi bi-trash-fill"></i>';
             BtnEliminar.classList.add('btn', 'btn-danger', 'w-100', 'text-uppercase', 'fw-bold', 'shadow', 'border-0');
 
             BtnModificar.addEventListener('click', () => llenarDatos(aplicaciones));

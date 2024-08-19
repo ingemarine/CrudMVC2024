@@ -162,7 +162,7 @@ class ActiveRecord {
     // Eliminar un registro - Toma el ID de Active Record
     public function eliminar() {
         $idQuery = static::$idTabla ?? 'id';
-        $query = "DELETE FROM "  . static::$tabla . " WHERE $idQuery = " . self::$db->quote($this->id);
+        $query = "DELETE FROM "  . static::$tabla . " WHERE $idQuery = " . self::$db->quote($this->idTabla);// se agrego tabla
         $resultado = self::$db->exec($query);
         return $resultado;
     }
