@@ -110,7 +110,7 @@ class PermisoController
         $permisoUsuario = filter_var($_POST['permiso_usuario'] ?? null, FILTER_SANITIZE_NUMBER_INT);
         $permisoRol = filter_var($_POST['permiso_rol'] ?? null, FILTER_SANITIZE_NUMBER_INT);
         $id = filter_var($_POST['permiso_id'] ?? null, FILTER_SANITIZE_NUMBER_INT);
-
+    
         if (!$permisoUsuario || !$permisoRol || !$id) {
             http_response_code(400);
             echo json_encode([
@@ -119,7 +119,7 @@ class PermisoController
             ]);
             return;
         }
-
+    
         try {
             $permiso = Permiso::find($id);
             if (!$permiso) {
@@ -130,7 +130,7 @@ class PermisoController
                 ]);
                 return;
             }
-
+    
             $permiso->sincronizar([
                 'permiso_usuario' => $permisoUsuario,
                 'permiso_rol' => $permisoRol,
@@ -151,6 +151,8 @@ class PermisoController
         }
     }
 
+
+    //funcion eliminar
     public static function eliminarAPI()
     {
         $id = filter_var($_POST['permiso_id'] ?? null, FILTER_SANITIZE_NUMBER_INT);

@@ -116,6 +116,55 @@ const guardar = async (e) => {
     }
 };
 
+//funcion modificar
+const Modificar = async (e) => {
+    e.preventDefault();
+
+    BtnModificar.disabled = true;
+
+    if (!validarFormulario(formulario, ['permiso_id', 'permiso_usuario', 'permiso_rol'])) {
+        BtnModificar.disabled = false;
+        return;
+    }
+
+    try {
+        const url = '/CrudMVC2024/API/permiso/modificar';
+        const formData = new FormData(formulario);
+        const respuesta = await fetch(url, {
+            method: 'POST',
+            body: formData
+        });
+
+        const data = await respuesta.json();
+
+        if (data.codigo === 3) {
+            await Swal.fire({
+                title: 'Éxito',
+                text: data.mensaje,
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            });
+            formulario.reset();
+            Buscar();
+            // Volver a estado inicial del formulario
+            BtnGuardar.parentElement.classList.remove('d-none');
+            BtnModificar.parentElement.classList.add('d-none');
+            BtnCancelar.parentElement.classList.add('d-none');
+        } else {
+            await Swal.fire({
+                title: 'Error',
+                text: data.mensaje,
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+        }
+    } catch (error) {
+        console.error('Error al modificar permiso:', error);
+    } finally {
+        BtnModificar.disabled = false;
+    }
+};
+
 const Eliminar = async (permiso) => {
     try {
         const url = '/CrudMVC2024/API/permiso/eliminar';
@@ -136,7 +185,12 @@ const Eliminar = async (permiso) => {
                 icon: 'success',
                 confirmButtonText: 'Aceptar'
             });
+            formulario.reset();
             Buscar();
+            // Volver a estado inicial del formulario
+            BtnGuardar.parentElement.classList.remove('d-none');
+            BtnModificar.parentElement.classList.add('d-none');
+            BtnCancelar.parentElement.classList.add('d-none');
         } else {
             await Swal.fire({
                 title: 'Error',
@@ -149,7 +203,6 @@ const Eliminar = async (permiso) => {
         console.error('Error al eliminar permiso:', error);
     }
 };
-
 const llenarDatos = (permiso) => {
     document.getElementById('permiso_id').value = permiso.permiso_id;
     document.getElementById('permiso_usuario').value = permiso.permiso_usuario;
@@ -170,5 +223,6 @@ const cancelar = (e) => {
 
 formulario.addEventListener('submit', guardar);
 BtnCancelar.addEventListener('click', cancelar);
+BtnModificar.addEventListener('click', Modificar)
 
 Buscar();
