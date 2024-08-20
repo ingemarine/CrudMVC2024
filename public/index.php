@@ -9,6 +9,9 @@ use Controllers\AplicacionController;
 use Controllers\RolController;
 use Controllers\UsuarioController;
 use Controllers\PermisoController;
+use Controllers\LoginController;
+
+
 
 
 
@@ -59,6 +62,14 @@ $router->post('/API/permiso/guardar', [PermisoController::class, 'guardarAPI']);
 $router->post('/API/permiso/modificar', [PermisoController::class, 'modificarAPI']);
 $router->post('/API/permiso/eliminar', [PermisoController::class, 'eliminarAPI']);
 
+
+//ESTO ES DE LOGIN//
+$router->get('/', [LoginController::class, 'login']);
+$router->get('/logout', [LoginController::class, 'logout']);
+$router->get('/menu', [LoginController::class, 'menu']);
+$router->get('/registro', [LoginController::class, 'registro']);
+$router->post('/API/registro', [LoginController::class, 'registroAPI']);
+$router->post('/API/login', [LoginController::class, 'loginAPI']);
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
 $router->comprobarRutas();

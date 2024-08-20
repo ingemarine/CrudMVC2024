@@ -35,4 +35,21 @@ class Usuario extends ActiveRecord
         $stmt->execute([$catalogo]);
         return $stmt->fetch();
     }
+
+
+    public function validarUsuarioExistente(): bool
+    {
+        $sql = "SELECT * FROM usuario where usu_catalogo = $this->usu_catalogo";
+        $resultado = static::fetchArray($sql);
+        return $resultado ? true : false;
+    }
+
+    public function getUsuarioExistente(): array
+    {
+        $sql = "SELECT usu_id,usu_nombre, usu_password, usu_catalogo, rol_nombre_ct, rol_nombre from permiso inner join usuario on permiso_usuario = usu_id inner join rol on rol_id = permiso_rol inner join aplicacion on rol_app = app_id where usu_catalogo = $this->usu_catalogo";
+        $resultado = static::fetchFirst($sql);
+        return $resultado;
+    }
 }
+
+
