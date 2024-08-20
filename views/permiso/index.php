@@ -1,6 +1,6 @@
 <div class="row justify-content-center mb-5">
     <form class="col-lg-5 border bg-light p-3" id="formPermiso">
-    <h3 class="text-center mb-3"><b>Asignacion de permisos</b></h3>
+        <h3 class="text-center mb-3"><b>Tabla de permisos</b></h3>
         <input type="hidden" name="permiso_id" id="permiso_id">
         <div class="row mb-3">
             <div class="col">
@@ -8,8 +8,8 @@
                 <select name="permiso_usuario" id="permiso_usuario" class="form-control">
                     <option value="">SELECCIONE...</option>
                     <?php foreach ($usuarios as $usuario) : ?>
-                        <option value="<?= $usuario['usu_id'] ?>">
-                            <?= $usuario['usu_nombre'] ?></option>
+                        <option value="<?= htmlspecialchars($usuario['usu_id']) ?>">
+                            <?= htmlspecialchars($usuario['usu_nombre']) ?></option>
                     <?php endforeach ?>
                 </select>
             </div>
@@ -20,8 +20,8 @@
                 <select name="permiso_rol" id="permiso_rol" class="form-control">
                     <option value="">SELECCIONE...</option>
                     <?php foreach ($roles as $rol) : ?>
-                        <option value="<?= $rol['rol_id'] ?>">
-                            <?= $rol['rol_nombre'] ?></option>
+                        <option value="<?= htmlspecialchars($rol['rol_id']) ?>">
+                            <?= htmlspecialchars($rol['rol_nombre']) ?></option>
                     <?php endforeach ?>
                 </select>
             </div>
@@ -38,14 +38,13 @@
                 <button type="button" id="btnCancelar" class="btn btn-danger w-100">Cancelar</button>
             </div>
         </div>
-
     </form>
 
     <div class="row justify-content-center mt-5">
         <div class="col-lg-6 table-wrapper">
-            <h2 class="text-center mb-4">Permisos Ingresadas</h2>
+            <h2 class="text-center mb-4">Permisos Ingresados</h2>
             <div class="table-responsive">
-                <table class="table table-bordered table-hover" id="TablaPermisos">
+                <table class="table table-bordered table-hover" id="TablitaPermiso">
                     <thead class="table-warning">
                         <tr>
                             <th>No.</th>
@@ -65,4 +64,4 @@
         </div>
     </div>
 </div>
-<script src="<?= asset('./build/js/permiso/index.js') ?>"></script>
+<script src="<?= htmlspecialchars(asset('./build/js/permiso/index.js')) ?>"></script>

@@ -34,8 +34,19 @@ class UsuarioController
             return;
         }
         
+        // Verificar si el catálogo ya existe
+        $catalogoExistente = Usuario::findByCatalogo($_POST['usu_catalogo']);
+        if ($catalogoExistente) {
+            http_response_code(400);
+            echo json_encode([
+                'codigo' => 0,
+                'mensaje' => 'El catálogo ingresado ya existe.'
+            ]);
+            return;
+        }
+    
         $_POST['usu_password'] = password_hash($_POST['usu_password'], PASSWORD_BCRYPT);
-
+    
         try {
             $usuario = new Usuario($_POST);
             $resultado = $usuario->crear();
@@ -53,7 +64,6 @@ class UsuarioController
             ]);
         }
     }
-
     public static function buscarAPI()
     {
         try {
@@ -110,19 +120,31 @@ class UsuarioController
         }
     }
 
+
+    //funcion eliminar
     public static function eliminarAPI()
     {
-        $id = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
-
+        getHeadersApi();
+        $input = json_decode(file_get_contents('php://input'), true);
+        $id = filter_var($input['usu_id'], FILTER_SANITIZE_NUMBER_INT);
+    
         try {
             $resultado = Usuario::find($id);
-            $resultado->sincronizar(['usu_situacion' => 0]);
-            $resultado->actualizar();
-            http_response_code(200);
-            echo json_encode([
-                'codigo' => 4,
-                'mensaje' => 'Usuario eliminado exitosamente',
-            ]);
+            if ($resultado) {
+                $resultado->sincronizar(['usu_situacion' => 0]);
+                $resultado->actualizar();
+                http_response_code(200);
+                echo json_encode([
+                    'codigo' => 4,
+                    'mensaje' => 'Usuario eliminado exitosamente',
+                ]);
+            } else {
+                http_response_code(404);
+                echo json_encode([
+                    'codigo' => 1,
+                    'mensaje' => 'Usuario no encontrado',
+                ]);
+            }
         } catch (Exception $e) {
             http_response_code(500);
             echo json_encode([
@@ -133,3 +155,5 @@ class UsuarioController
         }
     }
 }
+
+

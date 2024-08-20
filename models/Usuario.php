@@ -28,4 +28,11 @@ class Usuario extends ActiveRecord
         $sql = "SELECT * FROM usuario WHERE usu_situacion = 1";
         return self::fetchArray($sql);
     }
+    public static function findByCatalogo($catalogo)
+    {
+        $sql = "SELECT * FROM usuario WHERE usu_catalogo = ?";
+        $stmt = self::$db->prepare($sql);
+        $stmt->execute([$catalogo]);
+        return $stmt->fetch();
+    }
 }

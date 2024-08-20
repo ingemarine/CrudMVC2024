@@ -53,17 +53,9 @@ const guardar = async (e) => {
         };
 
         const respuesta = await fetch(url, config);
-
-        // Verificar que la respuesta sea JSON
-        const contentType = respuesta.headers.get("content-type");
-        if (!contentType || !contentType.includes("application/json")) {
-            const errorText = await respuesta.text();
-            throw new Error(`Respuesta no válida: ${errorText}`);
-        }
-
         const data = await respuesta.json();
         const { codigo, mensaje } = data;
-console.log(data)
+
         if (codigo === 1) {
             Swal.fire({
                 title: '¡Éxito!',
@@ -80,15 +72,15 @@ console.log(data)
             });
             formulario.reset();
             Buscar();
-        } else {
+        } else if (codigo === 0) {
             Swal.fire({
                 title: '¡Error!',
                 text: mensaje,
-                icon: 'warning',
+                icon: 'error',
                 showConfirmButton: false,
                 timer: 1500,
                 timerProgressBar: true,
-                background: '#e0f7fa',
+                background: '#ffebee',
                 customClass: {
                     title: 'custom-title-class',
                     text: 'custom-text-class'
@@ -137,7 +129,7 @@ const Buscar = async () => {
                 const BtnModificar = document.createElement('button');
                 const BtnEliminar = document.createElement('button');
 
-                BtnModificar.innerHTML = '<i class="bi bi-pencil-fill"></i>';
+                BtnModificar.innerHTML = '<i class="bi bi-pencil-square"></i>';
                 BtnModificar.classList.add('btn', 'btn-warning', 'w-100', 'text-uppercase', 'fw-bold', 'shadow', 'border-0');
 
                 BtnEliminar.innerHTML = '<i class="bi bi-trash"></i>';
