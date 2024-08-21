@@ -7,7 +7,7 @@
     <script src="<?= asset('build/js/app.js') ?>"></script>
     <link rel="shortcut icon" href="<?= asset('images/cit.png') ?>" type="image/x-icon">
     <link rel="stylesheet" href="<?= asset('build/styles.css') ?>">
-    <title>Base 2</title>
+    <title>INICIO SESION USUARIO</title>
 </head>
 
 <body>

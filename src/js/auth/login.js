@@ -15,7 +15,7 @@ const iniciar = async (e) => {
 
     try {
         const body = new FormData(formulario)
-        const url = "/login_test/API/login"
+        const url = "/CrudMVC2024/API/login"
         const config = {
             method: 'POST',
             body
@@ -31,7 +31,7 @@ const iniciar = async (e) => {
         if (codigo == 1) {
             icon = 'success'
             formulario.reset();
-            location.href = '/login_test/menu'
+            location.href = '/CrudMVC2024/menu'
         } else {
             icon = 'error'
             console.log(detalle);
