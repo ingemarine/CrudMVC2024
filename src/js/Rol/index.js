@@ -117,7 +117,7 @@ const Buscar = async () => {
             BtnEliminar.innerHTML = '<i class="bi bi-trash3"></i>';
             BtnEliminar.classList.add('btn', 'btn-danger', 'w-100', 'text-uppercase', 'fw-bold', 'shadow', 'border-0');
 
-            BtnModificar.addEventListener('click', () => llenarDatos(roles));
+            BtnModificar.addEventListener('click', () => traerDatos(roles));
             BtnEliminar.addEventListener('click', () => Eliminar(roles))
 
             celda1.innerText = contador;
@@ -151,7 +151,7 @@ const Buscar = async () => {
     TablaRol.tBodies[0].appendChild(fragment);
 }
 
-const llenarDatos = (roles) => {
+const traerDatos = (roles) => {
 
     TablaRol.parentElement.parentElement.classList.add('d-none');
     BtnGuardar.parentElement.classList.add('d-none');

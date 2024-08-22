@@ -39,7 +39,7 @@ const Buscar = async () => {
                 BtnEliminar.innerHTML = '<i class="bi bi-trash3"></i>';
                 BtnEliminar.classList.add('btn', 'btn-danger', 'w-100', 'text-uppercase', 'fw-bold', 'shadow', 'border-0');
 
-                BtnModificar.addEventListener('click', () => llenarDatos(permiso));
+                BtnModificar.addEventListener('click', () => traerDatos(permiso));
                 BtnEliminar.addEventListener('click', () => Eliminar(permiso));
 
                 celda1.innerText = contador;
@@ -203,7 +203,7 @@ const Eliminar = async (permiso) => {
         console.error('Error al eliminar permiso:', error);
     }
 };
-const llenarDatos = (permiso) => {
+const traerDatos = (permiso) => {
     document.getElementById('permiso_id').value = permiso.permiso_id;
     document.getElementById('permiso_usuario').value = permiso.permiso_usuario;
     document.getElementById('permiso_rol').value = permiso.permiso_rol;
