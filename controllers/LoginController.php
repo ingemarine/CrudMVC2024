@@ -9,6 +9,7 @@ use MVC\Router;
 
 class LoginController
 {
+    //funcion para entrar a menu
     public static function login(Router $router)
     {
         isNotAuth();
@@ -23,6 +24,22 @@ class LoginController
         header('Location: /CrudMVC2024/');
         exit;
     }
+
+    //funcion para que tenga permisos 
+    
+    public static function registro(Router $router)
+    {
+        isAuth();
+        hasPermission(['TIENDA_ADMIN']);
+        $router->render('auth/registro', [], 'layouts/menu');
+    }
+    public static function menu(Router $router)
+    {
+        // isAuth();
+        // hasPermission(['TIENDA_ADMIN', 'TIENDA_USER']);
+        $router->render('pages/menu', [], 'layouts/menu');
+    }
+
 
     public static function loginAPI()
     {

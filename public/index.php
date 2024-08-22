@@ -18,8 +18,6 @@ $router->setBaseURL('/' . $_ENV['APP_NAME']);
 
 //ESTO ES PRODUCTO//
 $router->get('/', [AppController::class, 'index']);
-
-
 $router->get('/producto', [ProductoController::class, 'index']);
 $router->get('/API/producto/buscar', [ProductoController::class, 'buscarAPI']);
 $router->post('/API/producto/guardar', [ProductoController::class, 'guardarAPI']);
@@ -64,6 +62,9 @@ $router->get('/menu', [LoginController::class, 'menu']);
 $router->get('/registro', [LoginController::class, 'registro']);
 $router->post('/API/registro', [LoginController::class, 'registroAPI']);
 $router->post('/API/login', [LoginController::class, 'loginAPI']);
+
+
+
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
 $router->comprobarRutas();

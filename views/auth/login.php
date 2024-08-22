@@ -19,3 +19,4 @@
         </div>
     </form>
 </div>
+<script src="<?=  asset('/build/js/auth/login.js' )?>" ></script>

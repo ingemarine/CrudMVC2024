@@ -17,7 +17,7 @@ function s($html) {
 function isAuth() {
     session_start();
     if(!isset($_SESSION['login'])) {
-        header('Location: /');
+        header('Location: /CrudMVC2024/');
     }
 }
 function isAuthApi() {
@@ -36,7 +36,7 @@ function isAuthApi() {
 function isNotAuth(){
     session_start();
     if(isset($_SESSION['auth'])) {
-        header('Location: /auth/');
+        header('Location: /auth/login');
     }
 }
 
@@ -51,7 +51,7 @@ function hasPermission(array $permisos){
     }
 
     if(array_search(true, $comprobaciones) !== false){}else{
-        header('Location: /');
+        header('Location: /CrudMVC2024/logout');
     }
 }
 

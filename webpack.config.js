@@ -11,6 +11,7 @@ module.exports = {
     'js/usuario/index' : './src/js/usuario/index.js',
     'js/permiso/index' : './src/js/permiso/index.js',
     'js/auth/login': './src/js/auth/login.js',
+    'js/auth/registro': './src/js/auth/registro.js',
 
     
   },
