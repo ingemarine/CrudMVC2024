@@ -1,25 +1,34 @@
-const { validarFormulario, Toast } = require("../funciones")
+const { validarFormulario, Toast } = require("../funciones");
+const Swal = require('sweetalert2');
 
-const formulario = document.querySelector('form')
+const formulario = document.querySelector('form');
 
 const iniciar = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (!validarFormulario(formulario)) {
-        Toast.fire({
+        Swal.fire({
             icon: 'info',
-            title: 'Debe llenar todos los campos'
-        })
-
+            title: 'Debe llenar todos los campos',
+            timer: 5000, // Duración de 5 segundos
+            timerProgressBar: true,
+            position: 'center',
+            didOpen: () => {
+                Swal.showLoading();
+            },
+            willClose: () => {
+                Swal.hideLoading();
+            }
+        });
         return;
     }
 
     try {
-        const body = new FormData(formulario)
-        const url = "/CrudMVC2024/API/login"
+        const body = new FormData(formulario);
+        const url = "/CrudMVC2024/API/login";
         const config = {
             method: 'POST',
             body
-        }
+        };
 
         const respuesta = await fetch(url, config);
         const data = await respuesta.json();
@@ -27,23 +36,32 @@ const iniciar = async (e) => {
 
         console.log(data);
 
-        let icon = 'info'
+        let icon = 'info';
         if (codigo == 1) {
-            icon = 'success'
+            icon = 'success';
             formulario.reset();
-            location.href = '/CrudMVC2024/menu'
+            location.href = '/CrudMVC2024/menu';
         } else {
-            icon = 'error'
+            icon = 'error';
             console.log(detalle);
         }
 
-        Toast.fire({
+        Swal.fire({
             icon: icon,
-            title: mensaje
-        })
+            title: mensaje,
+            timer: 10000, // Duración de 5 segundos
+            timerProgressBar: true,
+            position: 'center',
+            didOpen: () => {
+                Swal.showLoading();
+            },
+            willClose: () => {
+                Swal.hideLoading();
+            }
+        });
     } catch (error) {
         console.log(error);
     }
-}
+};
 
-formulario.addEventListener('submit', iniciar)
+formulario.addEventListener('submit', iniciar);

@@ -71,7 +71,7 @@ class LoginController
                     http_response_code(200);
                     echo json_encode([
                         'codigo' => 1,
-                        'mensaje' => 'Bienvenido al sistema, ' . $usuarioBD['usu_nombre'],
+                        'mensaje' => 'Bienvenido a nuestro sistema, ' . $usuarioBD['usu_nombre'],
                     ]);
                 } else {
                     http_response_code(401); // Código de estado para credenciales inválidas
