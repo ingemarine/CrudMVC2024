@@ -27,12 +27,14 @@ class LoginController
 
     //funcion para que tenga permisos 
     
-    public static function registro(Router $router)
-    {
-        isAuth();
-        hasPermission(['TIENDA_ADMIN']);
-        $router->render('auth/registro', [], 'layouts/menu');
-    }
+    // public static function registro(Router $router)
+    // {
+    //     isAuth();
+    //     hasPermission(['TIENDA_ADMIN']);
+    //     $router->render('auth/registro', [], 'layouts/menu');
+    // }
+
+    //ESTA FUNCION ES PARA QUE INGRESE SOLO EL QUE ES TIENDA_ADMIN
     public static function menu(Router $router)
     {
         // isAuth();

@@ -37,6 +37,8 @@ class Usuario extends ActiveRecord
     }
 
 
+
+    //FUNCIONES PARA LOGIN
     public function validarUsuarioExistente(): bool
     {
         $sql = "SELECT * FROM usuario where usu_catalogo = $this->usu_catalogo";
